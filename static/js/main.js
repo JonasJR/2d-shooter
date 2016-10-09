@@ -13,7 +13,7 @@ document.addEventListener("keyup", keyUpHandler, false);
 var keypress = false;
 
 player = new Player(
-  "images/player.png",
+  "static/images/player.png",
   c.width / 2 - PLAYER_WIDTH / 2,
   c.height - PLAYER_HEIGHT * 1.5,
   PLAYER_WIDTH, PLAYER_HEIGHT,
@@ -39,7 +39,7 @@ var keyUpPressed = false;
 var shots = [];
 
 var background = new Image();
-background.src = "images/background-sandgrass.jpg";
+background.src = "static/images/background-sandgrass.jpg";
 
 /* Game Loop */
 function gameLoop() {
