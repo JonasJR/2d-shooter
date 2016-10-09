@@ -2,8 +2,8 @@ $(document).ready(function() {
             console.log("JavaScript loaded");
 
             namespace = '/game';
-            address = prompt("Enter address!");
-            var socket = io.connect('http://' + address + namespace);
+
+            var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
 
             socket.on('connect', function() {
                 console.log("Connected");
