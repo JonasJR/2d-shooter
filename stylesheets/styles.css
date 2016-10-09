@@ -1,0 +1,16 @@
+body {
+  margin: 10px auto;
+  padding: 0;
+  background-color: #fff;
+  margin: 10 auto;
+  width: 800px;
+}
+
+#game-board {
+  display: inline;
+  background-color: black;
+  /*margin: 0 auto;
+  overflow: hidden;*/
+  box-shadow: 0px 0px 49px -6px rgba(107,107,107,1);
+
+}
