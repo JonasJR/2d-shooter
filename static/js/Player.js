@@ -62,4 +62,12 @@ class Player {
   getPosition() {
     return "x: " + x + ", y: " + y;
   }
+
+  getXPos() {
+    return this.x;
+  }
+
+  getYPos() {
+    return this.y;
+  }
 }

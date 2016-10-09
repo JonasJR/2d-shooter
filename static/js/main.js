@@ -123,6 +123,8 @@ function gameLoop() {
     check_collision();
 
     window.requestAnimationFrame(gameLoop);
+
+    socket.emit("move", {"xPos": player.getXPos(), "yPos": player.getYPos(), "id": "playerID"});
 }
 
 window.requestAnimationFrame(gameLoop);
