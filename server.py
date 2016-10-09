@@ -30,18 +30,14 @@ def index():
 
 
 @socketio.on('connect', namespace='/game')
-def test_connect():
+def on_connect():
     session['id'] = str(uuid4())
 
     name = random.choice(names) + "-" + str(random.randint(1, 9999))
-    opos = {"x": 400, "y": 300, "name": name, "type": "player",
+    opos = {"xPos": random.randint(1,800), "yPos": random.randint(1,600), "name": name, "type": "player",
             "direction": "right", "id": session['id']}
-    emit('identifed', opos, namespace='/game')
-    socketio.emit('newplayer', opos, namespace='/game')
-
-    for player_name in online_players.keys():
-        data = online_players[player_name]
-        emit('newplayer', data, namespace='/game')
+    emit('identifed', opos, namespace='/game') #emit sends to only the user
+    socketio.emit('newplayer', opos, namespace='/game') #socketio.emit sends to all users in the namespace
 
     print("Client connected", session["id"], "given name:", name)
     online_players[session['id']] = opos
@@ -52,7 +48,7 @@ def test_connect():
 
 @socketio.on('response', namespace='/game')
 def response(message):
-    emit('here_it_comes', {'data': message['data']}, namespace='/game')
+    socketio.emit('here_it_comes', {'data': message['data']}, namespace='/game')
 
 @socketio.on('disconnect', namespace='/game')
 def on_disconnect():
@@ -68,8 +64,7 @@ def on_ping():
 
 @socketio.on('move', namespace='/game')
 def move(message):
-    print("Moved!", message)
-
+    socketio.emit('new_pos', message, namespace='/game', broadcast=True);
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0')

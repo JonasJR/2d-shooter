@@ -97,11 +97,8 @@ function gameLoop() {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.closePath();
 
-    console.log(shots.length);
     if (shots.length > 0) {
-      console.log("i loop");
       shots.forEach(function(shot, index) {
-        console.log(shot.getPosition());
         shot.moveUp();
         ctx.beginPath();
         xView = shot.x + shot.width / 2;
