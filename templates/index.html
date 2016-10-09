@@ -12,6 +12,10 @@
     <p>Async mode is: <b>{{ async_mode }}</b></p>
     <p>Average ping/pong latency: <b><span id="ping-pong"></span>ms</b></p>
     <p>Status is: <b><span id="status"></span><b></p>
+      <form id="emit" method="POST" action='#'>
+          <input type="text" name="emit_data" id="emit_data" placeholder="Message">
+          <input type="submit" value="Echo">
+      </form>
     <script type="text/javascript" src="static/js/socket.js"></script>
 </body>
 

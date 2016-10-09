@@ -2,8 +2,8 @@ $(document).ready(function() {
             console.log("JavaScript loaded");
 
             namespace = '/game';
-
-            var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+            address = prompt("Enter address!");
+            var socket = io.connect('http://' + address + namespace);
 
             socket.on('connect', function() {
                 console.log("Connected");
@@ -22,8 +22,12 @@ $(document).ready(function() {
                 });
             }, 750);
 
-            socket.on('global_message', function(message) {
-              console.log("Global message: " + message);
+            socket.on('global_message', function(msg) {
+              console.log('Global message: ' + msg.data);
+            });
+
+            socket.on('here_it_comes', function(msg) {
+              console.log('HELLO :' + msg.data);
             });
 
             socket.on('player_disconnected', function(id) {
@@ -72,4 +76,9 @@ $(document).ready(function() {
                     "type": "player"
                 });
             };
+
+            $('form#emit').submit(function(event) {
+                socket.emit('response', {data: $('#emit_data').val()});
+                return false;
+            });
         });

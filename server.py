@@ -18,6 +18,12 @@ thread = None
 names = ["Jonas", "Jerry", "Morre", "Anton", "Trulle", "Herman"]
 online_players = {}
 
+def background_thread():
+    while True:
+        socketio.sleep(10)
+        socketio.emit('global_message',{'data': 'Wellcome to the server! Please tell your friends!'} , namespace='/game', broadcast=True)
+        print("GLOBAL MESSAGE!!!")
+
 @app.route('/')
 def index():
     return render_template('index.html', async_mode=socketio.async_mode)
@@ -39,8 +45,14 @@ def test_connect():
 
     print("Client connected", session["id"], "given name:", name)
     online_players[session['id']] = opos
+    global thread
+    if thread is None:
+        thread = socketio.start_background_task(target=background_thread)
     # print "added:", name
 
+@socketio.on('response', namespace='/game')
+def response(message):
+    emit('here_it_comes', {'data': message['data']}, namespace='/game')
 
 @socketio.on('disconnect', namespace='/game')
 def on_disconnect():
