@@ -1,33 +1,18 @@
 var c = document.getElementById("game-board");
 var ctx = c.getContext("2d");
 
-PLAYER_WIDTH = 100;
-PLAYER_HEIGHT = 100;
-PLAYER_SPEED = 7;
-
 var game_interval;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 var keypress = false;
+var points = 0;
 
-player = new Player(
-  "static/images/player.png",
-  c.width / 2 - PLAYER_WIDTH / 2,
-  c.height - PLAYER_HEIGHT * 1.5,
-  PLAYER_WIDTH, PLAYER_HEIGHT,
-  PLAYER_SPEED,
-  c.width,
-  c.height
-);
-
-points = 0;
-
-is_message = true;
-message = "Level 1";
-message_count = 0;
-MESSAGE_TIME = 100;
+var is_message = true;
+var message = "Level 1";
+var message_count = 0;
+let MESSAGE_TIME = 100;
 
 var right_pressed = false;
 var left_pressed = false;
@@ -37,9 +22,6 @@ var rotateLeftPressed = false;
 var rotateRightPressed = false;
 var keyUpPressed = false;
 var shots = [];
-
-var background = new Image();
-background.src = "static/images/background-sandgrass.jpg";
 
 /* Game Loop */
 function gameLoop() {
