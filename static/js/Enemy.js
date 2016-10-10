@@ -9,11 +9,11 @@ class Enemy {
     this.pipeWidth = PIPE_WIDTH;
   }
 
-  setX(x){
+  setX(x) {
     this.x = x;
   }
 
-  setY(y)(
+  setY(y) {
     this.y = y;
-  )
+  }
 }
