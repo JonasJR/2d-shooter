@@ -16,7 +16,7 @@ socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 
 names = ["Jonas", "Jerry", "Morre", "Anton", "Trulle", "Herman"]
-online_players = {}
+online_players = []
 
 def background_thread():
     while True:
@@ -36,11 +36,12 @@ def on_connect():
     name = random.choice(names) + "-" + str(random.randint(1, 9999))
     opos = {"xPos": random.randint(1,800), "yPos": random.randint(1,600), "name": name, "type": "player",
             "direction": "right", "id": session['id']}
-    emit('identifed', opos, namespace='/game') #emit sends to only the user
-    socketio.emit('newplayer', opos, namespace='/game') #socketio.emit sends to all users in the namespace
+    emit('your_player', opos, namespace='/game') #emit sends to only the user
+    online_players.append(opos)
+    players = {'online_players': online_players}
+    socketio.emit('online_players', players, namespace='/game') #socketio.emit sends to all users in the namespace
 
     print("Client connected", session["id"], "given name:", name)
-    online_players[session['id']] = opos
     global thread
     if thread is None:
         thread = socketio.start_background_task(target=background_thread)

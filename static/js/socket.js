@@ -1,12 +1,16 @@
 namespace = '/game';
+//socket variable that is used to comunicate with the server.
 var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
 
-console.log("JavaScript loaded");
-
+// A function that is called when the client gets connected.
+// Here we can do what ever, like tell the user that we are connected...
 socket.on('connect', function() {
 
 });
 
+// a ping and latency calculator. Every 0.75 seconds it starts
+// a timer and sends a ping to the server and calculates the
+// time until the pong gets back.
 var ping_pong_times = [];
 var start_time;
 window.setInterval(function() {
@@ -19,16 +23,24 @@ window.setInterval(function() {
     });
 }, 750);
 
+// Ths is a global message reciever. Every 1000s the server sends out a global message
+// to all connected players. Right now we just log the message but we can place it in a
+// chat window or something fun.
 socket.on('global_message', function(msg) {
     console.log('Global message: ' + msg.data);
 });
 
+// When some one disconnects this funtion is called.
 socket.on('player_disconnected', function(id) {
     console.log("disconnected_player_id: " + id);
 });
 
-socket.on('identifed', function(data) {
-    var tempPlayer = new Player(
+// The server creates a id and name and sends it to this function.
+// We create a tempPlayer to store our pos, id and name for further use in
+// the online_players function further down.
+var tempPlayer;
+socket.on('your_player', function(data) {
+    tempPlayer = new Player(
       "static/images/player.png",
       data.xPos,
       data.yPos,
@@ -39,31 +51,18 @@ socket.on('identifed', function(data) {
     );
     tempPlayer.id = data.id;
     tempPlayer.name = data.name;
-    console.log("identified player!");
+    console.log("Player ID stored: " + tempPlayer.id);
 });
 
+// Recieves all online players and sorts out yourself and stores every one else in the
+// otherPlayers array
+// This gets called when ever some one connects. Then everyone recieves a list of all online players and pos.
+var otherPlayers = [];
 socket.on('online_players', function(data) {
-
-});
-
-socket.on('newplayer', function(data) {
-    var player;
-    console.log("new player connected " + data.id);
-});
-
-
-// function sendPos(data) {
-//     socket.emit("move", {
-//         "xPos": "xPos",
-//         "yPos": "yPos",
-//         "id": "id",
-//         "type": "player"
-//     });
-// }
-
-$('form#emit').submit(function(event) {
-    socket.emit('response', {
-        data: $('#emit_data').val()
+    players = data.online_players;
+    players.forEach(function(player){
+      if(player.id != tempPlayer.id){
+        otherPlayers.push(player);
+      }
     });
-    return false;
 });
