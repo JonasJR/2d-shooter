@@ -78,6 +78,27 @@ function gameLoop() {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.closePath();
 
+    // Enemies
+    if (enemies > 0) {
+      enemies.forEach(function(enemy) {
+        ctx.beginPath();
+        var xView = enemy.x + enemy.width / 2;
+        var yView = enemy.y + enemy.width / 2;
+        ctx.arc(enemy.x, enemy.y, enemy.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = colors["enemy"];
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.translate(enemy.x, enemy.y);
+        ctx.rotate(enemy.angle * Math.PI / 180)
+        ctx.translate(-enemy.x , -enemy.y);
+        ctx.fillRect(enemy.x, enemy.y - enemy.pipeWidth/2, enemy.pipeLength, enemy.pipeWidth);
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.closePath();
+      });
+    }
+
+
     if (shots.length > 0) {
       shots.forEach(function(shot, index) {
         shot.moveUp();

@@ -5,6 +5,8 @@ class Enemy {
     this.y = y;
     this.radius = radius;
     this.angle = angle;
+    this.pipeLength = PIPE_LENGTH;
+    this.pipeWidth = PIPE_WIDTH;
   }
 
   setX(x){
