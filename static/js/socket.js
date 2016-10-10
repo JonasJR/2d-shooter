@@ -62,7 +62,7 @@ socket.on('online_players', function(data) {
     players = data.online_players;
     players.forEach(function(p){
       if(p.id != player.id){
-        enemy = new Enemy(p.id, p.xPos, p.yPos, PLAYER_WIDTH,0);
+        var enemy = new Enemy(p.id, p.xPos, p.yPos, PLAYER_WIDTH,0);
         enemies.push(enemy);
       }
     });
