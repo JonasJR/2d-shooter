@@ -1,5 +1,5 @@
 var game_interval;
-
+var sendInterval = 0;
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
