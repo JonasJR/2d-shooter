@@ -1,5 +1,7 @@
 PLAYER_WIDTH = 25;
 PLAYER_SPEED = 7;
+PIPE_LENGTH = 35;
+PIPE_WIDTH = 10;
 
 var c = document.getElementById("game-board");
 var ctx = c.getContext("2d");
@@ -16,8 +18,8 @@ var player = new Player(
   c.height - PLAYER_WIDTH * 2,
   PLAYER_WIDTH,
   PLAYER_SPEED,
-  35,
-  10,
+  PIPE_LENGTH,
+  PIPE_WIDTH,
   c.width,
   c.height
 );
