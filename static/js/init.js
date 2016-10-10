@@ -16,7 +16,7 @@ var player = new Player(
   c.height - PLAYER_WIDTH * 2,
   PLAYER_WIDTH,
   PLAYER_SPEED,
-  50,
+  35,
   10,
   c.width,
   c.height
