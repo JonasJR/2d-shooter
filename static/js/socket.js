@@ -57,19 +57,19 @@ socket.on('your_player', function(data) {
 // Recieves all online players and sorts out yourself and stores every one else in the
 // otherPlayers array
 // This gets called when ever some one connects. Then everyone recieves a list of all online players and pos.
-var otherPlayers = [];
 socket.on('online_players', function(data) {
-    otherPlayers = [];
+    enemies = [];
     players = data.online_players;
     players.forEach(function(p){
       if(p.id != player.id){
-        otherPlayers.push(p);
+        enemy = new Enemy(p.id, p.xPos, p.yPos, PLAYER_WIDTH,0);
+        enemies.push(enemy);
       }
     });
 });
 
 socket.on('new_pos', function(data) {
   if(data.id != player.id){
-    
+
   }
 });
