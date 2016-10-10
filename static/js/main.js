@@ -79,7 +79,7 @@ function gameLoop() {
     ctx.closePath();
 
     // Enemies
-    if (enemies > 0) {
+    if (enemies.length > 0) {
       enemies.forEach(function(enemy) {
         ctx.beginPath();
         var xView = enemy.x + enemy.width / 2;

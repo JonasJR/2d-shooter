@@ -41,6 +41,8 @@ socket.on('player_disconnected', function(id) {
 var tempPlayer;
 socket.on('your_player', function(data) {
     player.setId(data.id);
+    player.setX(data.xPos);
+    player.setY(data.yPos);
     // tempPlayer = new Player(
     //   data.xPos,
     //   data.yPos,
