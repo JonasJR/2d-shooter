@@ -41,10 +41,9 @@ socket.on('player_disconnected', function(id) {
 var tempPlayer;
 socket.on('your_player', function(data) {
     tempPlayer = new Player(
-      "static/images/player.png",
       data.xPos,
       data.yPos,
-      PLAYER_WIDTH, PLAYER_HEIGHT,
+      PLAYER_WIDTH,
       PLAYER_SPEED,
       c.width,
       c.height

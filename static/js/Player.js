@@ -1,7 +1,5 @@
 class Player {
-  constructor(image, x, y, radius, speed, board_width, board_height) {
-    this.image = new Image();
-    this.image.src = image;
+  constructor(x, y, radius, speed, board_width, board_height) {
     this.x = x;
     this.y = y;
     this.radius = radius
