@@ -8,4 +8,12 @@ class Enemy {
     this.pipeLength = PIPE_LENGTH;
     this.pipeWidth = PIPE_WIDTH;
   }
+
+  setX(x){
+    this.x = x;
+  }
+
+  setY(y)(
+    this.y = y;
+  )
 }

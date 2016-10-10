@@ -64,7 +64,7 @@ socket.on('online_players', function(data) {
     players = data.online_players;
     players.forEach(function(p){
       if(p.id != player.id){
-        enemy = new Enemy(p.id, p.xPos, p.yPos, PLAYER_WIDTH,0);
+        var enemy = new Enemy(p.id, p.xPos, p.yPos, PLAYER_WIDTH,0);
         enemies.push(enemy);
       }
     });
@@ -72,6 +72,11 @@ socket.on('online_players', function(data) {
 
 socket.on('new_pos', function(data) {
   if(data.id != player.id){
-
+    enemies.forEach(function(e){
+      if(e.id == data.id){
+        e.setX = data.xPos;
+        e.setY = data.yPos;
+      }
+    });
   }
 });
