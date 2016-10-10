@@ -6,4 +6,12 @@ class Enemy {
     this.radius = radius;
     this.angle = angle;
   }
+
+  setX(x){
+    this.x = x;
+  }
+
+  setY(y)(
+    this.y = y;
+  )
 }
