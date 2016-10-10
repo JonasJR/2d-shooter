@@ -1,5 +1,5 @@
 var game_interval;
-
+var sendInterval = 0;
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
@@ -123,7 +123,11 @@ function gameLoop() {
 
     window.requestAnimationFrame(gameLoop);
 
-    socket.emit("move", {"xPos": player.getXPos(), "yPos": player.getYPos(), "id": player.getId()});
+    sendInterval++;
+    if (sendInterval == 2) {
+      sendInterval = 0;
+      socket.emit("move", {"xPos": player.getXPos(), "yPos": player.getYPos(), "id": player.getId()});
+    }
 }
 
 window.requestAnimationFrame(gameLoop);
