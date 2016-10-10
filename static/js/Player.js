@@ -47,16 +47,14 @@ class Player {
 
   setY(y) {
     this.y = y;
-
-    if (this.y < 0) this.y = 0;
-    if (this.y + this.height > this.board_height) this.y = this.board_height - this.height;
+    if (this.y - this.radius < 0) this.y = this.radius;
+    if (this.y + this.radius > this.board_height) this.y = this.board_height - this.radius;
   }
 
   setX(x) {
     this.x = x;
-
-    if (this.x < 0) this.x = 0;
-    if (this.x + this.width > this.board_width) this.x = this.board_width - this.width;
+    if (this.x - this.radius < 0) this.x = this.radius;
+    if (this.x + this.radius > this.board_width) this.x = this.board_width - this.radius;
   }
 
   getPosition() {

@@ -66,8 +66,6 @@ function gameLoop() {
     ctx.beginPath();
     var xView = player.x + player.width / 2;
     var yView = player.y + player.width / 2;
-
-
     ctx.arc(player.x, player.y, player.radius, 0, 2 * Math.PI);
     ctx.fillStyle = colors["player"];
     ctx.fill();
