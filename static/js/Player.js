@@ -9,6 +9,7 @@ class Player {
     this.board_width = board_width;
     this.board_height = board_height;
     this.angle = 0;
+    this.shot = false;
     this.id = undefined;
   }
 
@@ -67,6 +68,14 @@ class Player {
 
   getYPos() {
     return this.y;
+  }
+
+  getAngle() {
+    return this.angle;
+  }
+
+  getShot() {
+    return this.shot;
   }
 
   setId(id) {

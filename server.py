@@ -20,9 +20,14 @@ online_players = []
 
 def background_thread():
     while True:
-        socketio.sleep(10)
+        socketio.sleep(100)
         socketio.emit('global_message',{'data': 'Wellcome to the server! Please tell your friends!'} , namespace='/game', broadcast=True)
         print("GLOBAL MESSAGE!!!")
+
+def background_calculation_thread():
+    while True:
+        socketio.emit('game_data', {'players': players, 'shots': shots}, namespace='/game', broadcast=True)
+        time.sleep(0.02)
 
 @app.route('/')
 def index():
@@ -70,9 +75,10 @@ def on_ping():
     socketio.emit('pong', None, namespace='/game')
 
 
-@socketio.on('move', namespace='/game')
-def move(message):
-    socketio.emit('new_pos', message, namespace='/game', broadcast=True);
+@socketio.on('update', namespace='/game')
+def update(data):
+    
+    # socketio.emit('new_pos', message, namespace='/game', broadcast=True);
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0')

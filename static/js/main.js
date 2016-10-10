@@ -123,7 +123,8 @@ function gameLoop() {
 
     window.requestAnimationFrame(gameLoop);
 
-    socket.emit("move", {"xPos": player.getXPos(), "yPos": player.getYPos(), "id": player.getId()});
+    socket.emit("update", {"xPos": player.getXPos(), "yPos": player.getYPos(), "angle": player.getAngle(), "shot": player.getShot(), "id": player.getId()});
+    player.shot = false;
 }
 
 window.requestAnimationFrame(gameLoop);
@@ -142,7 +143,8 @@ function keyDownHandler(e) {
     } else if (e.keyCode == 37) {
         rotateLeftPressed = true;
     } else if (e.keyCode == 38) {
-      shots.push(new Shot(player.x, player.y, 5, 5, 20, player.angle, c.width, c.height));
+      // shots.push(new Shot(player.x, player.y, 5, 5, 20, player.angle, c.width, c.height));
+      player.shot = true;
     }
 }
 
