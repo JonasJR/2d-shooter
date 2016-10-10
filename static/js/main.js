@@ -121,7 +121,7 @@ function keyDownHandler(e) {
     } else if (e.keyCode == 37) {
         rotateLeftPressed = true;
     } else if (e.keyCode == 38) {
-      shots.push(new Shot(player.x + player.width / 2, player.y + player.height / 2, 5, 5, 20, player.angle, c.width, c.height));
+      shots.push(new Shot(player.x, player.y, 5, 5, 20, player.angle, c.width, c.height));
     }
 }
 
