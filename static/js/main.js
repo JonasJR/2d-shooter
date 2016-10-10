@@ -123,7 +123,7 @@ function gameLoop() {
 
     window.requestAnimationFrame(gameLoop);
 
-    socket.emit("move", {"xPos": player.getXPos(), "yPos": player.getYPos(), "id": "playerID"});
+    socket.emit("move", {"xPos": player.getXPos(), "yPos": player.getYPos(), "id": player.getId()});
 }
 
 window.requestAnimationFrame(gameLoop);

@@ -5,6 +5,7 @@ PIPE_WIDTH = 10;
 
 var c = document.getElementById("game-board");
 var ctx = c.getContext("2d");
+var enemies = [];
 
 colors = {
   "player": "#2EC4B6",

@@ -73,4 +73,8 @@ class Player {
     console.log("Player given id: " + id);
     this.id = id;
   }
+
+  getId() {
+    return this.id;
+  }
 }
