@@ -3,11 +3,8 @@ var socket = io.connect('http://' + document.domain + ':' + location.port + name
 
 console.log("JavaScript loaded");
 
-
-
 socket.on('connect', function() {
-    console.log("Connected");
-    $("#status").text("Connected");
+
 });
 
 var ping_pong_times = [];
@@ -26,21 +23,27 @@ socket.on('global_message', function(msg) {
     console.log('Global message: ' + msg.data);
 });
 
-socket.on('here_it_comes', function(msg) {
-    console.log('HELLO :' + msg.data);
-});
-
-socket.on('new_pos', function(data) {
-
-});
-
 socket.on('player_disconnected', function(id) {
     console.log("disconnected_player_id: " + id);
 });
 
 socket.on('identifed', function(data) {
-    var player;
-    console.log("new player connected " + data.name);
+    var tempPlayer = new Player(
+      "static/images/player.png",
+      data.xPos,
+      data.yPos,
+      PLAYER_WIDTH, PLAYER_HEIGHT,
+      PLAYER_SPEED,
+      c.width,
+      c.height
+    );
+    tempPlayer.id = data.id;
+    tempPlayer.name = data.name;
+    console.log("identified player!");
+});
+
+socket.on('online_players', function(data) {
+
 });
 
 socket.on('newplayer', function(data) {
