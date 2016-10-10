@@ -40,17 +40,18 @@ socket.on('player_disconnected', function(id) {
 // the online_players function further down.
 var tempPlayer;
 socket.on('your_player', function(data) {
-    tempPlayer = new Player(
-      data.xPos,
-      data.yPos,
-      PLAYER_WIDTH,
-      PLAYER_SPEED,
-      c.width,
-      c.height
-    );
-    tempPlayer.id = data.id;
-    tempPlayer.name = data.name;
-    console.log("Player ID stored: " + tempPlayer.id);
+    player.setId(data.id);
+    // tempPlayer = new Player(
+    //   data.xPos,
+    //   data.yPos,
+    //   PLAYER_WIDTH,
+    //   PLAYER_SPEED,
+    //   c.width,
+    //   c.height
+    // );
+    // tempPlayer.id = data.id;
+    // tempPlayer.name = data.name;
+    // console.log("Player ID stored: " + tempPlayer.id);
 });
 
 // Recieves all online players and sorts out yourself and stores every one else in the
@@ -60,7 +61,7 @@ var otherPlayers = [];
 socket.on('online_players', function(data) {
     players = data.online_players;
     players.forEach(function(player){
-      if(player.id != tempPlayer.id){
+      if(player.id != player.id){
         otherPlayers.push(player);
       }
     });

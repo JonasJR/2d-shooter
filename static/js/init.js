@@ -1,4 +1,4 @@
-PLAYER_WIDTH = 50;
+PLAYER_WIDTH = 25;
 PLAYER_SPEED = 7;
 
 var c = document.getElementById("game-board");
@@ -16,6 +16,8 @@ var player = new Player(
   c.height - PLAYER_WIDTH * 2,
   PLAYER_WIDTH,
   PLAYER_SPEED,
+  50,
+  10,
   c.width,
   c.height
 );

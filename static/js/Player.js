@@ -1,9 +1,11 @@
 class Player {
-  constructor(x, y, radius, speed, board_width, board_height) {
+  constructor(x, y, radius, speed, pipeLength, pipeWidth, board_width, board_height) {
     this.x = x;
     this.y = y;
     this.radius = radius
     this.speed = speed;
+    this.pipeLength = pipeLength;
+    this.pipeWidth = pipeWidth;
     this.board_width = board_width;
     this.board_height = board_height;
     this.angle = 0;
@@ -70,6 +72,7 @@ class Player {
   }
 
   setId(id) {
+    console.log("Player given id: " + id);
     this.id = id;
   }
 }
