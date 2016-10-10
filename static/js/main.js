@@ -43,9 +43,11 @@ function gameLoop() {
 
     /* Paint Screen */
     ctx.clearRect(0, 0, c.width, c.height);
+    ctx.beginPath();
     ctx.fillStyle = colors["board"];
     ctx.fillRect(0, 0, c.width, c.height);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.closePath();
 
     if (is_message) {
         ctx.beginPath();
@@ -62,14 +64,19 @@ function gameLoop() {
 
     // Player
     ctx.beginPath();
-    // var xView = player.x + player.width / 2;
-    // var yView = player.y + player.height / 2;
-    ctx.translate(player.x, player.y);
-    ctx.rotate((90 + player.angle) * Math.PI / 180)
-    // ctx.translate(-xView, -yView);
+    var xView = player.x + player.width / 2;
+    var yView = player.y + player.width / 2;
+
+
     ctx.arc(player.x, player.y, player.radius, 0, 2 * Math.PI);
     ctx.fillStyle = colors["player"];
     ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.translate(player.x, player.y);
+    ctx.rotate(player.angle * Math.PI / 180)
+    ctx.translate(-player.x , -player.y);
+    ctx.fillRect(player.x, player.y - player.pipeWidth/2, player.pipeLength, player.pipeWidth);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.closePath();
 
