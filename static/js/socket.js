@@ -70,13 +70,18 @@ socket.on('online_players', function(data) {
     });
 });
 
-socket.on('new_pos', function(data) {
-  if(data.id != player.id){
-    enemies.forEach(function(e){
-      if(e.id == data.id){
-        e.setX(data.xPos);
-        e.setY(data.yPos);
-      }
-    });
-  }
+socket.on('game_data', function(data) {
+  data.players.forEach(function(p) {
+    if(player.id != p.id){
+      enemies.forEach(function(e) {
+        if(e.id == data.id){
+          e.setX(data.xPos);
+          e.setY(data.yPos);
+        }
+      });
+    }
+  });
+  data.shots.forEach(function(s) {
+    shots.push(s);
+  });
 });
