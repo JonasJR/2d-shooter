@@ -1,11 +1,10 @@
 class Player {
-  constructor(image, x, y, width, height, speed, board_width, board_height) {
+  constructor(image, x, y, radius, speed, board_width, board_height) {
     this.image = new Image();
     this.image.src = image;
     this.x = x;
     this.y = y;
-    this.width = width;
-    this.height = height;
+    this.radius = radius
     this.speed = speed;
     this.board_width = board_width;
     this.board_height = board_height;

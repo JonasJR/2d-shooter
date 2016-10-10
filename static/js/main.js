@@ -1,6 +1,3 @@
-var c = document.getElementById("game-board");
-var ctx = c.getContext("2d");
-
 var game_interval;
 
 document.addEventListener("keydown", keyDownHandler, false);
@@ -46,14 +43,9 @@ function gameLoop() {
 
     /* Paint Screen */
     ctx.clearRect(0, 0, c.width, c.height);
-
-    // Background
-    ctx.beginPath();
-    ctx.drawImage(background, 0, 0, c.width, c.height);
-    ctx.closePath();
-
+    ctx.fillStyle = colors["board"];
+    ctx.fillRect(0, 0, c.width, c.height);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-
 
     if (is_message) {
         ctx.beginPath();
@@ -70,12 +62,14 @@ function gameLoop() {
 
     // Player
     ctx.beginPath();
-    var xView = player.x + player.width / 2;
-    var yView = player.y + player.height / 2;
-    ctx.translate(xView, yView);
+    // var xView = player.x + player.width / 2;
+    // var yView = player.y + player.height / 2;
+    ctx.translate(player.x, player.y);
     ctx.rotate((90 + player.angle) * Math.PI / 180)
-    ctx.translate(-xView, -yView);
-    ctx.drawImage(player.image, player.x, player.y, player.width, player.height);
+    // ctx.translate(-xView, -yView);
+    ctx.arc(player.x, player.y, player.radius, 0, 2 * Math.PI);
+    ctx.fillStyle = colors["player"];
+    ctx.fill();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.closePath();
 
