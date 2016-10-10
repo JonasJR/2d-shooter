@@ -31,7 +31,7 @@ def index():
 
 @socketio.on('connect', namespace='/game')
 def on_connect():
-    session['id'] = str(uuid4())
+    session['id'] = random.randint(1,99999)
 
     name = random.choice(names) + "-" + str(random.randint(1, 9999))
     opos = {"xPos": random.randint(1,800), "yPos": random.randint(1,600), "name": name, "type": "player",
@@ -54,8 +54,15 @@ def response(message):
 @socketio.on('disconnect', namespace='/game')
 def on_disconnect():
     print("Disconnected", session["id"])
-    online_players.pop(session["id"], None)
+    #del online_players[session["id"]]
+    for player in online_players:
+        print(player)
+        if player['id'] == session["id"]:
+            online_players.remove(player)
     socketio.emit("player_disconnected", session["id"], namespace='/game')
+    players = {'online_players': online_players}
+    socketio.emit('online_players', players, namespace='/game') #socketio.emit sends to all users in the namespace
+
 
 
 @socketio.on('ping', namespace='/game')
