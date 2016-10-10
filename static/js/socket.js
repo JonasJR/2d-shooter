@@ -59,10 +59,11 @@ socket.on('your_player', function(data) {
 // This gets called when ever some one connects. Then everyone recieves a list of all online players and pos.
 var otherPlayers = [];
 socket.on('online_players', function(data) {
+    otherPlayers = [];
     players = data.online_players;
-    players.forEach(function(player){
-      if(player.id != player.id){
-        otherPlayers.push(player);
+    players.forEach(function(p){
+      if(p.id != player.id){
+        otherPlayers.push(p);
       }
     });
 });
